@@ -1,0 +1,8 @@
+.jobAdvertisementItem{
+    margin-top: 50px;
+}
+.jobAdvertisementList{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
