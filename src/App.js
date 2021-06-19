@@ -1,5 +1,5 @@
-import JobAdvertisementDashboard from './layouts/JobAdvertisementDashboard';
-import Navi from './layouts/Navi';
+import JobAdvertisementDashboard from './layouts/JobAdvertisement/JobAdvertisementDashboard';
+import Navi from './layouts/Navi/Navi.js';
 import {Container} from "reactstrap";
 import {Route} from "react-router-dom"
 import Home from './pages/Home';

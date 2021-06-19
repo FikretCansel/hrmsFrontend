@@ -9,7 +9,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import {logOut} from "../../store/actions/userActions"
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignedIn() {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -46,6 +48,10 @@ export default function SignedIn() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+  const handleLogOut = () => {
+    dispatch(logOut());
+    handleMenuClose();
   };
 
 
@@ -65,7 +71,7 @@ export default function SignedIn() {
       onClose={handleMenuClose}
     >
       <Link to="/myProfile"onClick={handleMenuClose} ><MenuItem>Profil</MenuItem></Link>
-      <MenuItem onClick={handleMenuClose}>Çıkış Yap</MenuItem>
+      <MenuItem onClick={handleLogOut}>Çıkış Yap</MenuItem>
     </Menu>
   );
 

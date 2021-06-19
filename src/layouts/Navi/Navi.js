@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import SignedIn from './SignedIn';
 import SignedOut from './SignedOut';
-import "../css/navi.css"
+import "../../css/navi.css"
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux";
 
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navi() {
   const classes = useStyles();
 
-  const {user} = useSelector(state => state.user)
+  const {user} = useSelector(state => state?.user)
 
   return (
     <div className={classes.grow}>

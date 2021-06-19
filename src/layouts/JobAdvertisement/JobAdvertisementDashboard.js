@@ -1,9 +1,9 @@
 import React from 'react'
 import {Row,Col} from "reactstrap"
-import JobAdvertisementList from "../pages/JobAdvertisementList";
+import JobAdvertisementList from "../../pages/JobAdvertisementList";
 import JobAdvertisementFilter from "./JobAdvertisementFilter";
 import { Route } from 'react-router';
-import JobAdvertisementDetail from '../pages/JobAdvertisementDetail';
+import JobAdvertisementDetail from '../../pages/JobAdvertisementDetail';
 function JobAdvertisementDashboard() {
     return (
         <div>

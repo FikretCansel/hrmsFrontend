@@ -4,6 +4,8 @@ import jobAdvertisementService from "../services/jobAdvertisementService";
 import { Button } from "reactstrap";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import CandidateService from "../services/candidateService";
+import { useSelector } from "react-redux";
+import { JOBSEEKER } from "../constant/userTypes";
 
 export default function JobAdvertisementDetail() {
   let { id } = useParams();
@@ -18,12 +20,29 @@ export default function JobAdvertisementDetail() {
       .then((result) => setDetails(result.data.data));
   }, [id]);
 
+  const user = useSelector(state => state.user)
+
   const applyToJob = () => {
-    let candidateSer = new CandidateService();
-    candidateSer
+    
+    if(isApplyToJob){
+      let candidateSer = new CandidateService();
+      candidateSer
       .applyToJob(details.id, 2)
       .then((result) => setAlert(result.data.message));
+    }
+
   };
+
+  function isApplyToJob(){
+    if(user.userType===JOBSEEKER){
+      return true;
+    }
+
+    return false;
+    
+  }
+
+
 
   return (
     <div>
@@ -36,7 +55,7 @@ export default function JobAdvertisementDetail() {
       <h6>{details.creationDate}</h6>
       <h6>{details.city?.cityName}</h6>
       <h6>{details.jobPosition?.name}</h6>
-      <Button onClick={applyToJob}>Başvuruda Bulun</Button>
+      <Button disabled={!isApplyToJob()} onClick={applyToJob}>Başvuruda Bulun</Button>
       {alert !== "" ? (
         <Alert severity="success">
           <AlertTitle>Başarılı</AlertTitle>
