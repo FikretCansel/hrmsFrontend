@@ -37,9 +37,7 @@ export default function JobAdvertisementDetail() {
     if(user.userType===JOBSEEKER){
       return true;
     }
-
     return false;
-    
   }
 
 

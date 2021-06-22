@@ -12,6 +12,7 @@ import SignedOut from './SignedOut';
 import "../../css/navi.css"
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -62,20 +63,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navi() {
+export default function Navi({handleDrawerOpen,open}) {
   const classes = useStyles();
 
-  const {user} = useSelector(state => state?.user)
+  const {user} = useSelector(state => state.user)
 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            edge="start"
-            className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
@@ -97,11 +99,8 @@ export default function Navi() {
           </div>
           <div className={classes.grow} />
           {user===null?<SignedOut/>:<SignedIn/>}
-          
-          
         </Toolbar>
       </AppBar>
-      
     </div>
   );
 }

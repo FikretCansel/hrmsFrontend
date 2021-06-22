@@ -1,7 +1,16 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "../css/jobSeekerProfile.css";
 import { Alert, Col } from "reactstrap";
 export default function JobSeekerProfile() {
+
+  // const [, set] = useState(initialState)
+
+  // useEffect(() => {
+    
+  // }, [id])
+
+
+
   return (
     <div className="profileContainer">
       <Col xs="8">

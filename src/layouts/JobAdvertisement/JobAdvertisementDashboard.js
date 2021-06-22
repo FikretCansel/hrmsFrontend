@@ -4,11 +4,16 @@ import JobAdvertisementList from "../../pages/JobAdvertisementList";
 import JobAdvertisementFilter from "./JobAdvertisementFilter";
 import { Route } from 'react-router';
 import JobAdvertisementDetail from '../../pages/JobAdvertisementDetail';
+
+
 function JobAdvertisementDashboard() {
     return (
         <div>
             <Row>
-                <Col xs="3">
+                <Col xs="1">
+                    
+                </Col>
+                <Col xs="2" style={{marginTop:50}}>
                     <JobAdvertisementFilter/>
                 </Col>
                 <Col xs="8">
