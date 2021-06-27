@@ -70,7 +70,7 @@ export default function SignedIn() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="/myProfile"onClick={handleMenuClose} ><MenuItem>Profil</MenuItem></Link>
+      <Link to="/profile/my"onClick={handleMenuClose} ><MenuItem>Profil</MenuItem></Link>
       <MenuItem onClick={handleLogOut}>Çıkış Yap</MenuItem>
     </Menu>
   );

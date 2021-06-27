@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from "react";
 import "../../css/companyProfile.css";
-import { Alert, Col } from "reactstrap";
-import EmployerService from "../../services/EmployerService";
+import { Col } from "reactstrap";
+import EmployerService from "../../services/employerService";
 
 export default function CompanyProfile({id}) {
 
@@ -10,13 +10,15 @@ export default function CompanyProfile({id}) {
   useEffect(() => {
     let EmployerSer=new EmployerService();
 
+
+
     EmployerSer.getByid(id).then((result)=>setCompany(result.data.data))
   }, 
   [id]);
 
   return (
     <div className="profileContainer">
-      <Col xs="8">
+      <Col xs="12">
         <div className="profile">
           <div className="profileWall">
             <img
@@ -26,10 +28,10 @@ export default function CompanyProfile({id}) {
             />
           </div>
           <div className="basicInfos">
-            <h1>{company.companyName}</h1>
-            <h6>{company.email}</h6>
-            <h6>Phone :{company.phone}</h6>
-            <h6>WebSite :{company.webSite}</h6>
+            <h1>{company?.companyName}</h1>
+            <h6>{company?.email}</h6>
+            <h6>Phone :{company?.phone}</h6>
+            <h6>WebSite :{company?.webSite}</h6>
           </div>
           
         </div>

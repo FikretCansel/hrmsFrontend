@@ -10,13 +10,10 @@ function JobAdvertisementDashboard() {
     return (
         <div>
             <Row>
-                <Col xs="1">
-                    
-                </Col>
-                <Col xs="2" style={{marginTop:50}}>
+                <Col xs="3">
                     <JobAdvertisementFilter/>
                 </Col>
-                <Col xs="8">
+                <Col xs="9">
                     <Route exact path="/jobAdvertisement" component={JobAdvertisementList}/>
                     <Route path="/jobAdvertisement/detail/:id" component={JobAdvertisementDetail}/>
                     <Route path="/jobAdvertisement/list" component={JobAdvertisementList}/>

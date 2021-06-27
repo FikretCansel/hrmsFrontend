@@ -9,11 +9,11 @@ export class AuthService{
     jobSeekerLogin(email,password){
         return axios.post("http://localhost:8080/api/jobSeekers/login",{email,password});
     }
-    employerRegister(email,password,companyName){//blabla
-        return axios.post("http://localhost:8080/api/employers/register",{email,password,companyName});
+    employerRegister(values){//blabla
+        return axios.post("http://localhost:8080/api/employers/register",values);
     }
-    jobSeekerRegister(email,password,firstName,lastName){
-        return axios.post("http://localhost:8080/api/jobSeekers/login",{email,password,firstName,lastName});
+    jobSeekerRegister(values){
+        return axios.post("http://localhost:8080/api/jobSeekers/register",values);
     }
 
 

@@ -7,9 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useParams } from 'react-router';
 import jobAdvertisementService from "../../services/jobAdvertisementService";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   table: {
@@ -35,7 +35,7 @@ export default function ACompanyJobAdvertisements({id}) {
       fetchData(id)
     }
     
-  }, [id]);
+  }, [id,user]);
 
 
   const fetchData=(companyId)=>{
@@ -52,11 +52,12 @@ export default function ACompanyJobAdvertisements({id}) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Açıklama</TableCell>
+            <TableCell>Şirkete ait iş ilanları</TableCell>
             <TableCell align="right">minumum maaş</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">Max-maaş</TableCell>
+            <TableCell align="right">iş pozisyonu</TableCell>
+            <TableCell align="right">şehir</TableCell>
+            <TableCell align="right">detaylar için</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,9 +67,10 @@ export default function ACompanyJobAdvertisements({id}) {
                 {row.description}
               </TableCell>
               <TableCell align="right">{row.minSalary}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.maxSalary}</TableCell>
+              <TableCell align="right">{row.jobPosition.name}</TableCell>
+              <TableCell align="right">{row.city.cityName}</TableCell>
+              <TableCell align="right"><Link to={`/jobAdvertisement/detail/${row.id}`}>Başvur</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>

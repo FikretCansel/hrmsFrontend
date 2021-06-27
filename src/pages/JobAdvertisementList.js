@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import jobAdvertisementService from "../services/jobAdvertisementService";
 import "../css/jobAdvertisementList.css";
 
-export default function JobAdvertisementList() {
+export default function JobAdvertisementList() {                                                                                              
+  
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {
@@ -20,6 +21,8 @@ export default function JobAdvertisementList() {
   //     .toISOString()
   //     .split("T")[0];
   // }
+
+  
 
   return (
     <div className="jobAdvertisementList">

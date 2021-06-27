@@ -1,107 +1,88 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
-
+import { Formik, Form } from 'formik';
+import * as Yup from "yup";
+import HrmsTextField from '../../utilities/customFormControls/HrmsTextField';
+import HrmsTypeTextField from '../../utilities/customFormControls/HrmsTypeTextField';
+import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
 
-export default function RegisterEmployerForm({registerSubmit}) {
-    const classes = useStyles();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+export default function RegisterEmployerForm({ registerSubmit }) {
+  const classes = useStyles();
+
+  const [repeatPassword, setRepaitPassword] = useState("");
+
+  const requiredMessage = "Bu alan gereklidir";
+
+  const schema = Yup.object({
+    email: Yup.string().email().required(requiredMessage),
+    password: Yup.string().min(8, "şifre çok kısa").required(requiredMessage),
+    companyName: Yup.string().required(requiredMessage),
+    phone: Yup.number().min(8).required(requiredMessage),
+    websiteLink: Yup.string().required(requiredMessage)
+  });
 
 
-    return (
-        <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="companyName"
-              label="companyName"
-              type="text"
-              id="companyName"
-              autoComplete="current-companyName"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+  const initialValues = {
+    email: "",
+    password: "",
+    companyName: "",
+    phone: "",
+    websiteLink: ""
+  }
 
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={(e) => registerSubmit(e)}
-            >
-              Kayıt ol
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-    )
+  const handleOnSubmit=(values)=>{
+
+    if(repeatPassword===values.password){
+      registerSubmit(values)
+    }
+
+
+    console.log(values)
+  }
+
+
+
+  return (
+
+    <Formik initialValues={initialValues} validationSchema={schema} onSubmit={(values) => {
+      handleOnSubmit(values);
+    }}>
+      <Form className={classes.form}>
+
+        <HrmsTextField gridSize={12} fieldName="companyName" label="Şirket Adı" />
+
+        <HrmsTextField gridSize={12} fieldName="email" label="Email" />
+
+        <HrmsTypeTextField type="password" gridSize={12} fieldName="password" label="Şifre" />
+
+        <TextField fullWidth type="password" gridSize={12} value={repeatPassword} onChange={(e)=>setRepaitPassword(e.target.value)} label="Şifre Tekrarı" />
+
+        <HrmsTypeTextField type="number" gridSize={12} fieldName="phone" label="Telefon numarası" />
+
+        <HrmsTextField gridSize={12} fieldName="websiteLink" label="Website link" />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Kayıt ol
+        </Button>
+      </Form>
+    </Formik>
+  )
 }

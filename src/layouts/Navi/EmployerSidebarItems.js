@@ -32,7 +32,7 @@ export default function EmployerSidebarItems() {
             <ListItemText primary="İlan Ver"/>
           </ListItem>
           </Link>
-          <Link to={"/company/my"}>
+          <Link to={`/company/${user.user.id}`}>
           <ListItem button>
             <ListItemIcon>
               <InboxIcon />

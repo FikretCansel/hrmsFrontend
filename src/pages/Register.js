@@ -11,11 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { signIn } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
-import { AuthService } from "../services/AuthService";
+import { AuthService } from "../services/authService";
 import { EMPLOYER, JOBSEEKER } from "../constant/userTypes";
 import { useHistory } from "react-router";
 import RegisterEmployerForm from "../layouts/Register/RegisterEmployerForm";
 import RegisterJobSeekerForm from "../layouts/Register/RegisterJobSeekerForm";
+import HrmsResultAlert from "../utilities/customFormControls/HrmsResultAlert";
 
 
 function Copyright() {
@@ -55,26 +56,42 @@ export default function Register() {
   const dispatch = useDispatch();
 
   const [userType, setUserType] = useState(JOBSEEKER);
-  
+  const [processResult, setProcessResult] = useState(null)
+
   let history = useHistory();
   const classes = useStyles();
 
-  const registerSubmit = async (event) => {
-    event.preventDefault();
+  const registerSubmit = async (values) => {
     let authSer = new AuthService();
     if (userType === JOBSEEKER) {
+
+      console.log("çalıştı")
       await authSer
-        .jobSeekerRegister()
+        .jobSeekerRegister(values)
         .then(
-          (result) =>
-            result.data.success && userAddToDispath(result.data.data, JOBSEEKER)
+          (result) =>{
+             result.data.success && userAddToDispath(result.data.data, JOBSEEKER)
+
+             setProcessResult(result.data)
+
+             console.log(result)
+          }
+           
         );
     } else if (userType === EMPLOYER) {
+
       await authSer
-        .employerRegister()
+        .employerRegister(values)
         .then(
-          (result) =>
+          (result) =>{
+            
             result.data.success && userAddToDispath(result.data.data, EMPLOYER)
+
+            setProcessResult(result.data)
+
+            
+          }
+            
         );
     }
   };
@@ -105,14 +122,31 @@ export default function Register() {
             Kayıt ol
           </Typography>
          
-          <Grid direction="row">
+          <Grid container>
             <Button color={userType===JOBSEEKER?"primary":"default"} onClick={selectJobSeeker}>Bireysel</Button>
             <Button color={userType===EMPLOYER?"primary":"default"} onClick={selectEmployer}>Şirket</Button>
           </Grid>
           {userType===EMPLOYER?<RegisterEmployerForm registerSubmit={registerSubmit}/>:null}
           {userType===JOBSEEKER?<RegisterJobSeekerForm registerSubmit={registerSubmit}/>:null}
           
+          <Grid container >
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
         </div>
+
+        <HrmsResultAlert processResult={processResult}/>
+
+        
+
         <Box mt={8}>
           <Copyright />
         </Box>

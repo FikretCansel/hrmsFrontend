@@ -2,10 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from '../layouts/JobAdvertisement/AddresForm';
+import AddJobAdvertisementForm from '../layouts/JobAdvertisement/AddJobAdvertisementForm';
 
 
 function Copyright() {
@@ -66,18 +65,19 @@ export default function JobAdvertisementAdd() {
   return (
     <React.Fragment>
       <CssBaseline />
-      
+
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             Ilan Ver
           </Typography>
-          
+
           <React.Fragment>
-              <React.Fragment>
-                <AddressForm/>
-                
-              </React.Fragment>
+            <React.Fragment>
+
+              <AddJobAdvertisementForm />
+
+            </React.Fragment>
           </React.Fragment>
         </Paper>
         <Copyright />

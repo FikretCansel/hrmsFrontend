@@ -15,9 +15,10 @@ import Container from "@material-ui/core/Container";
 
 import { signIn } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
-import { AuthService } from "../services/AuthService";
+import { AuthService } from "../services/authService";
 import { EMPLOYER, JOBSEEKER } from "../constant/userTypes";
 import { useHistory } from "react-router";
+import HrmsResultAlert from "../utilities/customFormControls/HrmsResultAlert";
 
 function Copyright() {
   return (
@@ -58,7 +59,12 @@ export default function Login() {
   const [userType, setUserType] = useState(JOBSEEKER);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [processResult, setProcessResult] = useState(null);
+
   let history = useHistory();
+
+
+
   const classes = useStyles();
 
   const loginSubmit = async (event) => {
@@ -68,15 +74,22 @@ export default function Login() {
       await authSer
         .jobSeekerLogin(email, password)
         .then(
-          (result) =>
+          (result) =>{
             result.data.success && userAddToDispath(result.data.data, JOBSEEKER)
+
+            setProcessResult(result.data)
+          }
         );
     } else if (userType === EMPLOYER) {
       await authSer
         .employerLogin(email, password)
         .then(
-          (result) =>
+          (result) =>{
             result.data.success && userAddToDispath(result.data.data, EMPLOYER)
+
+            setProcessResult(result.data)
+          }
+            
         );
     }
   };
@@ -106,9 +119,9 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Grid direction="row">
-            <Button color={userType===JOBSEEKER?"primary":"default"} onClick={selectJobSeeker}>JobSeeker</Button>
-            <Button color={userType===EMPLOYER?"primary":"default"} onClick={selectEmployer}>Employer</Button>
+          <Grid>
+            <Button color={userType===JOBSEEKER?"primary":"default"} onClick={selectJobSeeker}>Bireysel</Button>
+            <Button color={userType===EMPLOYER?"primary":"default"} onClick={selectEmployer}>Şirket</Button>
           </Grid>
           <form className={classes.form} noValidate>
             <TextField
@@ -165,6 +178,9 @@ export default function Login() {
             </Grid>
           </form>
         </div>
+
+        <HrmsResultAlert processResult={processResult}/>
+        
         <Box mt={8}>
           <Copyright />
         </Box>
