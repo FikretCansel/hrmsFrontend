@@ -11,11 +11,13 @@ import { Row, Col } from "reactstrap";
 import { Button } from "@material-ui/core";
 import HrmsResultAlert from "../utilities/customFormControls/HrmsResultAlert";
 
+
 export default function JobAdvertisementDetail() {
   let { id } = useParams();
 
   const [details, setDetails] = useState([]);
-  const [processResult, setProcessResult] = useState(null)
+  const [processResult, setProcessResult] = useState(null);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     let jobAdvertisementSer = new jobAdvertisementService();
@@ -24,13 +26,11 @@ export default function JobAdvertisementDetail() {
       .then((result) => setDetails(result.data.data));
   }, [id]);
 
-  const user = useSelector((state) => state.user);
-
   const applyToJob = () => {
     if (isApplyToJob) {
       let candidateSer = new CandidateService();
       candidateSer
-        .applyToJob(details.id, 2)
+        .applyToJob(details.id, user?.user?.id,details.employer.id)
         .then((result) => setProcessResult(result.data));
     }
   };

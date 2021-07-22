@@ -15,6 +15,4 @@ export class AuthService{
     jobSeekerRegister(values){
         return axios.post("http://localhost:8080/api/jobSeekers/register",values);
     }
-
-
 }

@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import jobAdvertisementService from "../../services/jobAdvertisementService";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { EMPLOYER, JOBSEEKER } from '../../constant/userTypes';
 
 const useStyles = makeStyles({
   table: {
@@ -70,7 +71,7 @@ export default function ACompanyJobAdvertisements({id}) {
               <TableCell align="right">{row.maxSalary}</TableCell>
               <TableCell align="right">{row.jobPosition.name}</TableCell>
               <TableCell align="right">{row.city.cityName}</TableCell>
-              <TableCell align="right"><Link to={`/jobAdvertisement/detail/${row.id}`}>Başvur</Link></TableCell>
+              <TableCell align="right">{user.userType===JOBSEEKER?<Link to={`/jobAdvertisement/detail/${row.id}`}>Başvur</Link>:<Link to={`/candidates/${row.id}`}>Başvuruları gör</Link>}</TableCell>
             </TableRow>
           ))}
         </TableBody>

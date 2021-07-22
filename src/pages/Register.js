@@ -57,7 +57,6 @@ export default function Register() {
 
   const [userType, setUserType] = useState(JOBSEEKER);
   const [processResult, setProcessResult] = useState(null)
-
   let history = useHistory();
   const classes = useStyles();
 
@@ -65,7 +64,6 @@ export default function Register() {
     let authSer = new AuthService();
     if (userType === JOBSEEKER) {
 
-      console.log("çalıştı")
       await authSer
         .jobSeekerRegister(values)
         .then(
@@ -79,26 +77,23 @@ export default function Register() {
            
         );
     } else if (userType === EMPLOYER) {
-
       await authSer
         .employerRegister(values)
         .then(
           (result) =>{
-            
             result.data.success && userAddToDispath(result.data.data, EMPLOYER)
-
             setProcessResult(result.data)
 
-            
           }
             
         );
     }
+
   };
 
   const userAddToDispath = (user, userType) => {
     dispatch(signIn({ user, userType }));
-    history.push("/jobAdvertisement");
+    history.push("/verifyEmail");
   };
 
 

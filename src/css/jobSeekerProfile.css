@@ -20,6 +20,12 @@
     border: 2px solid black;
     border-radius: 50%;
 }
+.profileAvatar{
+    width: 800px;
+    height: 800px;
+}
+
+
 .cvContainer{
     text-align: center;
    

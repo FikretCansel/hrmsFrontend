@@ -4,10 +4,6 @@ import axios from "axios"
 
 export default class JobSeekerService{
 
-   
-
-
-
     getJobSeekerProfileById(id){
         return axios.get(`http://localhost:8080/api/jobSeekers/getById?id=${id}`); 
     }

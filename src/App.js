@@ -9,6 +9,8 @@ import JobAdvertisementAdd from "./pages/JobAdvertisementAdd";
 import CompanyProfileDashboard from "./pages/CompanyProfileDashboard";
 
 import { Grid } from "@material-ui/core";
+import EmailVerification from "./pages/EmailVerification";
+import Candidates from "./pages/Candidates";
 function App() {
   return (
     <div style={{ margin: "auto" }}>
@@ -25,11 +27,12 @@ function App() {
         <Route path="/jobAdvertisement" component={JobAdvertisementDashboard} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        
+        <Route path="/verifyEmail" component={EmailVerification} />
         <Route path="/company/:id" component={CompanyProfileDashboard} />
         <Route path="/" exact component={Home} />
         <Route path="/profile/:id" component={JobSeekerProfile} />
         <Route path="/JobAdvertisementAdd" component={JobAdvertisementAdd} />
+        <Route path="/candidates/:id" component={Candidates} />
         </Grid>
       </Grid>
     </div>

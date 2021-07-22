@@ -2,10 +2,13 @@ import axios from "axios";
 
 
 export default class CandidateService{
-    applyToJob(jobAdvertisementId,JobseekerId) {
+    applyToJob(jobAdvertisementId,JobseekerId,employerId) {
         const candidate={
             jobAdvertisement:{
-                id:jobAdvertisementId
+                id:jobAdvertisementId,
+                employer:{
+                    id:employerId
+                }
             },
             jobSeeker:{
                 id:JobseekerId
